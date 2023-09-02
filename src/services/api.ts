@@ -29,6 +29,8 @@ export const pokemonApi = createApi({
         query: (id) => `type/${id}`,
     })
 
+    
+
   }),
 })
 
