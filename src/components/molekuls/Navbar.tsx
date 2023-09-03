@@ -1,8 +1,21 @@
-import React from 'react'
+
+
+import { Link, BrowserRouter } from "react-router-dom";
+
+
 
 function Navbar() {
   return (
-    <div>Pokedex</div>
+    
+    <div className='w-screen border border-red-400'>
+      <p>
+        Pokedex
+      </p>
+  
+        <Link to={`/pokemon`}>Favorite</Link>
+    
+    </div>
+    
   )
 }
 
