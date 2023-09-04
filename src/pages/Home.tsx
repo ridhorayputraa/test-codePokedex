@@ -64,7 +64,7 @@ function Home() {
       ) : (
         <>
           {pokemonList.map((pokemon, index) => (
-            <Card key={index} id={pokemon.id} name={pokemon.name} />
+            <Card key={index}  name={pokemon.name} />
           ))}
         </>
       )}

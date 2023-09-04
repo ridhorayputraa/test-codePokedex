@@ -1,34 +1,86 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useGetPokemonByNameQuery } from "../../services/api";
 
 type typeCard = {
-  id: number;
+ 
   name: string;
   img: string;
-  types: string[]; // Assuming types is an array of strings
+  types: string[];
 };
 
-function Card({ id, name, img, types }: typeCard) {
+function Card({  name, img, types }: typeCard) {
   const { data, error, isLoading } = useGetPokemonByNameQuery(name);
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  // Assuming that `data` contains additional details about the Pokémon
+  const id = data && data.id
 
-  console.log(data)
+  // Function to add/remove a Pokémon from favorites
+  const toggleFavorite = (data) => {
+    console.log(data.id)
+    const favorites = getFavoritesFromLocalStorage();
+    console.log(favorites, 'variable favorite di fn toogle favorite')
+
+
+    console.log(isFavorite)
+
+    if (isFavorite) {
+      // Remove from favorites
+      const updatedFavorites = favorites.filter((favoriteId) => favoriteId !== data.id);
+      console.log(updatedFavorites, 'update favorite')
+      setFavoritesToLocalStorage(updatedFavorites);
+      setIsFavorite(false);
+    } else {
+      // Add to favorites
+      const updatedFavorites = [...favorites, data.id];
+      console.log(updatedFavorites)
+      setFavoritesToLocalStorage(updatedFavorites);
+      setIsFavorite(true);
+    }
+  };
+
+  useEffect(() => {
+    const favorites = getFavoritesFromLocalStorage();
+    console.log(favorites, 'useEffect favorites');
+    console.log(id, 'useEffect id');
+  
+    // Check if the current Pokémon's ID is in the favorites array
+    const isCurrentPokemonFavorite = favorites.includes(id);
+    console.log(isCurrentPokemonFavorite, 'isCurrentPokemonFavorite');
+  
+    // Set the isFavorite state based on the check
+    setIsFavorite(isCurrentPokemonFavorite);
+  }, [id]);
+  
+ 
+
+  const getFavoritesFromLocalStorage = () => {
+    const favoritesJson = localStorage.getItem("favorites");
+    return favoritesJson ? JSON.parse(favoritesJson) : [];
+  };
+
+  const setFavoritesToLocalStorage = (favorites: number[]) => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
 
   return (
     <div className="flex flex-col border border-red-500">
-     {isLoading ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        data && <>
-        <p>{data.id}</p>
-        <p>{data.name}</p>
-        <p>{data.types[0].type.name}</p>
-        </>
+        data && (
+          <>
+            <p>{data.id}</p>
+            <p>{data.name}</p>
+            <p>{data.types[0].type.name}</p>
+            <button onClick={() => toggleFavorite(data)}>
+              {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+            </button>
+          </>
+        )
       )}
-</div>
+    </div>
   );
 }
 
