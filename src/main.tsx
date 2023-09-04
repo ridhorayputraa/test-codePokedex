@@ -19,6 +19,8 @@ import Home from "./pages/Home";
 import Navbar from "./components/molekuls/Navbar";
 import Detail from "./pages/Detail";
 import './index.css'
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 
 
@@ -34,7 +36,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
+  <Provider store={store}>
     <React.StrictMode>
       <RouterProvider router={router}  />
     </React.StrictMode>
+  </Provider>
   );
