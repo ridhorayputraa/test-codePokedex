@@ -119,12 +119,12 @@ function Card({ idParam, name }: typeCard) {
               </p>
             </Link>
             <div className="flex flex-row justify-around w-full border border-red-500">
-              <Link>
+              <Link to={`/${data?.types[0]?.type?.name}`}>
                 <p className="font-poppins font-semibold hover:opacity-90 text-lg text-orange-900">
-                  {data.types[0].type.name}
+                  {data.types[0]?.type?.name}
                 </p>
               </Link>
-              <Link>
+              <Link to={`/${data?.types[1]?.type?.name}`}>
                 <p className="font-poppins text-purple-900 font-semibold hover:opacity-90 text-lg ">
                   {data.types[1]?.type?.name}
                 </p>

@@ -1,4 +1,4 @@
-import { Type } from './api';
+import { Type } from "./api";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Define a service using a base URL and expected endpoints
@@ -40,8 +40,13 @@ export const pokemonApi = createApi({
     getPokemonByTypesId: builder.query<Type, string>({
       query: (type) => `type/${type}`,
     }),
+
     getPokemonByTypes: builder.query<Type, string>({
       query: () => `type`,
+    }),
+
+    getPokemonSpecies: builder.query<Type, string>({
+      query: (name) => `pokemon-species/${name}`,
     }),
   }),
 });
