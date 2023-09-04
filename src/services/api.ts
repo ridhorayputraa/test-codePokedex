@@ -23,7 +23,7 @@ export type Type = {
   type?: string;
 };
 
-export const pokemonApi = createApi({
+export const pokemonApi:any = createApi({
   reducerPath: "pokemonApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://pokeapi.co/api/v2/" }),
 
