@@ -1,5 +1,9 @@
+/** @jsxImportSource @emotion/react */
+
 import React, { useState, useEffect } from "react";
 import { useGetPokemonByNameQuery } from "../../services/api";
+import { css, useTheme } from "@emotion/react";
+import {Link} from 'react-router-dom'
 
 type typeCard = {
   idParam?: number;
@@ -10,6 +14,8 @@ type typeCard = {
 
 function Card({ idParam, name, img, types }: typeCard) {
   console.log(idParam)
+  const theme = useTheme();
+
   const { data, error, isLoading } = useGetPokemonByNameQuery(name);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -19,6 +25,7 @@ function Card({ idParam, name, img, types }: typeCard) {
 
   // Function to add/remove a Pokémon from favorites
   const toggleFavorite = (data) => {
+    
     console.log(data.id);
     const favorites = getFavoritesFromLocalStorage();
     console.log(favorites, "variable favorite di fn toogle favorite");
@@ -64,8 +71,39 @@ function Card({ idParam, name, img, types }: typeCard) {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
+
+  const initTipe = data && data.types[0].type.name
+
+  const tipe = initTipe
+  
+  console.log(`${theme.color.type[tipe]} hayoo`)
+
+  console.log(tipe)
+
+
+  console.log(theme.color.type.normal)
+
+  const card = css`
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  border-radius: 5px;
+  padding: 0.5em;
+  cursor: pointer;
+  transition: 0.1s all ease;
+  background: ${theme.color.type[tipe]};
+
+  &:hover {
+    transform: scale(1.02);
+    transition: 0.1s all ease;
+  }
+`;
+
   return (
-    <div className="flex flex-col  max-w-screen-lg border border-red-500 w-1/3">
+  
+    <div css={card}  className="flex flex-col  max-w-screen-lg border border-red-500 w-1/3">
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -82,8 +120,9 @@ function Card({ idParam, name, img, types }: typeCard) {
             </button>
           </>
         )
-      )}
+        )}
     </div>
+        
   );
 }
 

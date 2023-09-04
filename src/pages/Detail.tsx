@@ -19,7 +19,7 @@ function Detail() {
       {favoritePokemonIds.length === 0 ? (
         <p>Tidak ada Pokémon favorit yang tersimpan.</p>
       ) : (
-        <div className="pokemon-list">
+        <div  className="pokemon-list">
           {favoritePokemonIds.map((id) => (
             <Card key={id} name={id} />
           ))}
