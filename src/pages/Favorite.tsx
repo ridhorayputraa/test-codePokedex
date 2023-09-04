@@ -1,6 +1,5 @@
 
-import React, { useState, useEffect } from "react";
-import { useGetPokemonByNameQuery } from "../../services/api";
+import { useEffect, useState } from "react";
 import Card from "../components/molekuls/Card"; // Ganti dengan path ke komponen Card yang sesuai
 import Navbar from "../components/molekuls/Navbar";
 

@@ -7,9 +7,8 @@ import DetailCard from "../components/molekuls/DetailCard";
 
 
 function Detail() {
-  const { name } = useParams<"name">();
+  const { name }:any = useParams<"name">();
 
-  console.log(name);
 
   const { data, isLoading, error } = useGetPokemonByNameQuery(name);
  
@@ -20,7 +19,7 @@ function Detail() {
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>Error: {error.message}</p>
+        <p>Error</p>
       ) : (
       <DetailCard dataProps={data}/>
       )}

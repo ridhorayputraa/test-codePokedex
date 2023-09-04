@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import {  useGetPokemonByTypesQuery } from "../../services/api";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-const FilterPokemon = () => {
-  const { data } = useGetPokemonByTypesQuery();
+import { useGetPokemonByTypesQuery } from "../../services/api";
+function FilterPokemon() {
+  const { data }:any = useGetPokemonByTypesQuery();
   const [selectedType, setSelectedType] = useState('');
   const navigate = useNavigate(); // Dapatkan fungsi navigate dari React Router
 
-  const handleTypeChange = (event) => {
+  const handleTypeChange = (event:any) => {
     const newType = event.target.value;
     setSelectedType(newType);
     navigate(`/${newType}`); // Navigasi ke jenis yang dipilih
@@ -24,7 +23,7 @@ const FilterPokemon = () => {
         <option value="/">
           <Link to={"/"}> All</Link>
         </option>
-        {data?.results?.map((data) => {
+        {data?.results?.map((data:any) => {
           return (
             <option value={data.name}>
               <Link to={"/pokemon" + data.name}>{data.name}</Link>
@@ -35,6 +34,6 @@ const FilterPokemon = () => {
       </select>
     </div>
   );
-};
+}
 
 export default FilterPokemon;
