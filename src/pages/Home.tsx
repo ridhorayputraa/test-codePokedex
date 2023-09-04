@@ -38,12 +38,12 @@ function Home() {
     };
   }, [nextUrl]);
 
-  const fetchMorePokemon = async (url) => {
+  const fetchMorePokemon = async (url:any) => {
     try {
       const response = await fetch(url);
       const newData = await response.json();
       if (newData && newData.results) {
-        setPokemonList((prevList) => [
+        setPokemonList((prevList:any) => [
           ...prevList,
           ...newData.results.slice(0, numberOfPokemonToDisplay),
         ]);
@@ -55,20 +55,20 @@ function Home() {
   };
 
   return (
-    <>
+    <div className='w-full justify-center flex flex-col text-center items-center'>
       <Navbar />
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        <>
+        <div className='flex max-w-screen-md items-center  border border-green-200 justify-center content-center flex-row flex-wrap'>
           {pokemonList.map((pokemon, index) => (
             <Card key={index}  name={pokemon.name} />
           ))}
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

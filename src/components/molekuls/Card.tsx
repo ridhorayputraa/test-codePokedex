@@ -2,37 +2,40 @@ import React, { useState, useEffect } from "react";
 import { useGetPokemonByNameQuery } from "../../services/api";
 
 type typeCard = {
- 
+  idParam?: number;
   name: string;
   img: string;
   types: string[];
 };
 
-function Card({  name, img, types }: typeCard) {
+function Card({ idParam, name, img, types }: typeCard) {
   const { data, error, isLoading } = useGetPokemonByNameQuery(name);
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const id = data && data.id
+  const id = data && data.id;
+
+  console.log(data);
 
   // Function to add/remove a Pokémon from favorites
   const toggleFavorite = (data) => {
-    console.log(data.id)
+    console.log(data.id);
     const favorites = getFavoritesFromLocalStorage();
-    console.log(favorites, 'variable favorite di fn toogle favorite')
+    console.log(favorites, "variable favorite di fn toogle favorite");
 
-
-    console.log(isFavorite)
+    console.log(isFavorite);
 
     if (isFavorite) {
       // Remove from favorites
-      const updatedFavorites = favorites.filter((favoriteId) => favoriteId !== data.id);
-      console.log(updatedFavorites, 'update favorite')
+      const updatedFavorites = favorites.filter(
+        (favoriteId) => favoriteId !== data.id
+      );
+      console.log(updatedFavorites, "update favorite");
       setFavoritesToLocalStorage(updatedFavorites);
       setIsFavorite(false);
     } else {
       // Add to favorites
       const updatedFavorites = [...favorites, data.id];
-      console.log(updatedFavorites)
+      console.log(updatedFavorites);
       setFavoritesToLocalStorage(updatedFavorites);
       setIsFavorite(true);
     }
@@ -40,18 +43,16 @@ function Card({  name, img, types }: typeCard) {
 
   useEffect(() => {
     const favorites = getFavoritesFromLocalStorage();
-    console.log(favorites, 'useEffect favorites');
-    console.log(id, 'useEffect id');
-  
+    console.log(favorites, "useEffect favorites");
+    console.log(id, "useEffect id");
+
     // Check if the current Pokémon's ID is in the favorites array
     const isCurrentPokemonFavorite = favorites.includes(id);
-    console.log(isCurrentPokemonFavorite, 'isCurrentPokemonFavorite');
-  
+    console.log(isCurrentPokemonFavorite, "isCurrentPokemonFavorite");
+
     // Set the isFavorite state based on the check
     setIsFavorite(isCurrentPokemonFavorite);
   }, [id]);
-  
- 
 
   const getFavoritesFromLocalStorage = () => {
     const favoritesJson = localStorage.getItem("favorites");
@@ -63,7 +64,7 @@ function Card({  name, img, types }: typeCard) {
   };
 
   return (
-    <div className="flex flex-col border border-red-500">
+    <div className="flex flex-col  max-w-screen-lg border border-red-500 w-1/3">
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -74,6 +75,7 @@ function Card({  name, img, types }: typeCard) {
             <p>{data.id}</p>
             <p>{data.name}</p>
             <p>{data.types[0].type.name}</p>
+            <img src={data.sprites.front_default} />
             <button onClick={() => toggleFavorite(data)}>
               {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
             </button>
