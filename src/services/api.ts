@@ -58,4 +58,5 @@ export const {
   useGetPokemonByNameQuery,
   useGetPokemonByTypesIdQuery,
   useGetPokemonByTypesQuery,
+  useGetPokemonSpeciesQuery,
 } = pokemonApi;

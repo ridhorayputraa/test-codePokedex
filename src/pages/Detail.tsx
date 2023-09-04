@@ -22,7 +22,7 @@ function Detail() {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-      <DetailCard data={data}/>
+      <DetailCard dataProps={data}/>
       )}
     </div>
   );

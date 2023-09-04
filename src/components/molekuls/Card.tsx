@@ -87,7 +87,6 @@ function Card({ idParam, name }: typeCard) {
     height: 100%;
     border-radius: 5px;
     padding: 0.5em;
-
     transition: 0.1s all ease;
     background: ${theme.color.type[tipe]};
 
@@ -101,7 +100,7 @@ function Card({ idParam, name }: typeCard) {
   return (
     <div
       css={card}
-      className="flex flex-col  max-w-screen-lg border border-red-500 w-1/3"
+      className="flex flex-col mt-2 max-w-screen-lg border border-red-500 w-1/3"
     >
       {isLoading ? (
         <p>Loading...</p>
@@ -132,7 +131,7 @@ function Card({ idParam, name }: typeCard) {
             </div>
             <img src={data.sprites?.front_default} alt={data.name} />
             <button
-              className="font-poppins font-reguler text-lg text-zinc-900"
+              className="font-poppins bg-slate-50 px-6 rounded-2xl hover:opacity-90 py-2 font-medium  text-zinc-900"
               onClick={() => toggleFavorite(data)}
             >
               {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
