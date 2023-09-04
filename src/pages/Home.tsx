@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../components/molekuls/Navbar';
-import { useGetPokemonByTypesQuery, useGetPokemonQuery } from '../services/api';
+import { useEffect, useState } from 'react';
 import Card from '../components/molekuls/Card';
-import PokemonList from '../components/molekuls/PokemonList';
 import FilterPokemon from '../components/molekuls/FilterPokemon';
+import Navbar from '../components/molekuls/Navbar';
+import { useGetPokemonQuery } from '../services/api';
 
 function Home() {
   const { data , error, isLoading } = useGetPokemonQuery();

@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../components/molekuls/Navbar';
-import { useGetPokemonByTypesIdQuery, useGetPokemonByTypesQuery, useGetPokemonQuery } from '../services/api';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Card from '../components/molekuls/Card';
 import FilterPokemon from '../components/molekuls/FilterPokemon';
-import { useParams } from 'react-router-dom';
+import Navbar from '../components/molekuls/Navbar';
+import { useGetPokemonByTypesIdQuery } from '../services/api';
 
 function TypePages() {
   const { type } = useParams<"type">();
-  console.log(type?.pokemon, 'ini type')
 
   const { data, error, isLoading } = useGetPokemonByTypesIdQuery(type);
   const [pokemonList, setPokemonList] = useState([]);
