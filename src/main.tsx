@@ -9,19 +9,18 @@
 //   </React.StrictMode>,
 // )
 
+import { ThemeProvider } from "@emotion/react";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
-import Navbar from "./components/molekuls/Navbar";
-import Detail from "./pages/Detail";
-import "./index.css";
 import { Provider } from "react-redux";
-import { store } from "./store/store";
-import { ThemeProvider } from "@emotion/react";
-import { theme } from "./theme";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import Detail from "./pages/Detail";
 import Favorite from "./pages/Favorite";
+import Home from "./pages/Home";
 import TypePages from "./pages/TypePages";
+import { store } from "./store/store";
+import { theme } from "./theme";
 
 const router = createBrowserRouter([
   {
