@@ -7,8 +7,8 @@ import { Link, BrowserRouter } from "react-router-dom";
 function Navbar() {
   return (
     
-    <div className='w-screen max-w-screen-xl border flex flex-row justify-center  border-red-400'>
-      <div className=" max-w-screen-xl">
+    <div className='w-screen bg-slate-200 border  justify-center  border-red-400'>
+      <div className=" max-w-screen-xl flex flex-row  justify-around">
 
       <p>
         Pokedex
