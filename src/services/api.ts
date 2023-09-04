@@ -1,4 +1,3 @@
-import { Type } from "./api";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Define a service using a base URL and expected endpoints
@@ -6,21 +5,22 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // Define a type for Pokemon
 export type Pokemon = {
   sprites: any;
-  id: number;
-  name: string;
-  results: [];
-  slice: any;
-  next: any;
-  types: any;
+  id?: number;
+  name?: string;
+  results?: [];
+  slice?: any;
+  next?: any;
+  types?: any;
   // Add other fields relevant to Pokemon here
 };
 
 export type Type = {
-  id: number;
-  name: string;
-  error: string;
-  message: string;
-  type: string;
+  pokemon: any;
+  id?: number;
+  name?: string;
+  error?: string;
+  message?: string;
+  type?: string;
 };
 
 export const pokemonApi = createApi({

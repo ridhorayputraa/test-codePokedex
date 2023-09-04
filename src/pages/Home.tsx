@@ -6,7 +6,7 @@ import { useGetPokemonQuery } from '../services/api';
 
 function Home() {
   const { data , error, isLoading } = useGetPokemonQuery();
-  const [pokemonList, setPokemonList] = useState([]);
+  const [pokemonList, setPokemonList] = useState<any[]>([]);
   const [nextUrl, setNextUrl] = useState('');
 
   // Init pokemon data
@@ -44,7 +44,7 @@ function Home() {
       const response = await fetch(url);
       const newData = await response.json();
       if (newData && newData.results) {
-        setPokemonList((prevList:any) => [
+        setPokemonList((prevList) => [
           ...prevList,
           ...newData.results.slice(0, numberOfPokemonToDisplay),
         ]);
@@ -66,7 +66,7 @@ function Home() {
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>Error: {error.message}</p>
+        <p>Error: </p>
       ) : (
         <div className='relative flex max-w-screen-lg items-center   justify-center content-center flex-row flex-wrap'>
           {pokemonList.map((pokemon, index) => (

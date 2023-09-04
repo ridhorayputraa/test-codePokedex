@@ -6,7 +6,7 @@ import Navbar from '../components/molekuls/Navbar';
 import { useGetPokemonByTypesIdQuery } from '../services/api';
 
 function TypePages() {
-  const { type } = useParams<"type">();
+  const { type }:any = useParams<"type">();
 
   const { data, error, isLoading } = useGetPokemonByTypesIdQuery(type);
   const [pokemonList, setPokemonList] = useState([]);
@@ -17,7 +17,6 @@ function TypePages() {
   console.log(data?.pokemon, 'Type pegaes');
 
   useEffect(() => {
-    console.log(data?.pokemon, 'Type pegaes');
     if (data && data.pokemon && data.pokemon.length > 0) {
       // Batasi jumlah data yang akan ditampilkan ke 30
       setPokemonList(data.pokemon.slice(0, numberOfPokemonToDisplay));
@@ -33,12 +32,14 @@ function TypePages() {
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>Error: {error.message}</p>
+        <p>Error:</p>
       ) : (
         <div className='relative flex max-w-screen-lg items-center   justify-center content-center flex-row flex-wrap'>
-          {pokemonList.map((pokemon, index) => (
-            <Card key={index} name={pokemon.pokemon?.name} />
-          ))}
+          {pokemonList.map((pokemon:any, index) => {
+            return (
+              <Card key={index} name={pokemon?.pokemon?.name} />
+            );
+          })}
         </div>
       )}
     </div>
