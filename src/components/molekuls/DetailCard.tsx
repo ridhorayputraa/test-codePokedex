@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { useEffect, useState } from "react";
 import { css, useTheme } from "@emotion/react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetPokemonSpeciesQuery } from "../../services/api";
 
@@ -14,10 +14,9 @@ function DetailCard({ dataProps }: any) {
   const id = dataProps && dataProps.id;
   const dataNama = dataProps && dataProps.name;
 
-  const { data, isLoading, error } = useGetPokemonSpeciesQuery(dataNama);
+  const { data }:any = useGetPokemonSpeciesQuery(dataNama);
   // console.log(data);
-  console.log(data);
-  const initTipe = dataProps?.types[0].type.name;
+  const initTipe = dataProps?.types[0]?.type.name;
 
   const tipe = initTipe;
 
