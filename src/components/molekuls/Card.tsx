@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useGetPokemonByNameQuery } from "../../services/api";
 import { css, useTheme } from "@emotion/react";
 import {Link} from 'react-router-dom'
+import { lighten } from "polished";
+
 
 type typeCard = {
   idParam?: number;
