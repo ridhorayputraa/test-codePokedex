@@ -69,7 +69,7 @@ function Home() {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        <div className='relative flex max-w-screen-md items-center  border border-green-200 justify-center content-center flex-row flex-wrap'>
+        <div className='relative flex max-w-screen-lg items-center   justify-center content-center flex-row flex-wrap'>
           {pokemonList.map((pokemon, index) => (
             <Card key={index}  name={pokemon.name} />
           ))}

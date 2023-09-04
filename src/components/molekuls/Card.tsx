@@ -100,7 +100,7 @@ function Card({ idParam, name }: typeCard) {
   return (
     <div
       css={card}
-      className="flex flex-col mt-2 max-w-screen-lg border border-red-500 w-1/3"
+      className="flex flex-col mx-1  my-2 max-w-screen-lg  w-1/4"
     >
       {isLoading ? (
         <p>Loading...</p>
@@ -108,7 +108,7 @@ function Card({ idParam, name }: typeCard) {
         <p>Error...</p>
       ) : (
         data && (
-          <div className="w-full text-center items-center flex flex-col border border-red-300">
+          <div className="w-full text-center items-center flex flex-col  -red-300">
             <Link to={"/pokemon/" + data.name}>
               <p className="font-poppins font-reguler text-lg text-zinc-900">
                 {data.id}
@@ -117,7 +117,7 @@ function Card({ idParam, name }: typeCard) {
                 {data.name}
               </p>
             </Link>
-            <div className="flex flex-row justify-around w-full border border-red-500">
+            <div className="flex flex-row justify-around w-full  -red-500">
               <Link to={`/${data?.types[0]?.type?.name}`}>
                 <p className="font-poppins font-semibold hover:opacity-90 text-lg text-orange-900">
                   {data.types[0]?.type?.name}
