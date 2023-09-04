@@ -1,22 +1,20 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState, useEffect } from "react";
-import { useGetPokemonByNameQuery } from "../../services/api";
 import { css, useTheme } from "@emotion/react";
-import {Link} from 'react-router-dom'
-import { lighten } from "polished";
-
+import { useEffect, useState } from "react";
+import { useGetPokemonByNameQuery } from "../../services/api";
+import { Link } from "react-router-dom";
 
 type typeCard = {
   idParam?: number;
-  name: string;
-  img: string;
-  types: string[];
+  name?: string;
+  img?: string;
+  types?: string[];
 };
 
-function Card({ idParam, name, img, types }: typeCard) {
-  console.log(idParam)
-  const theme = useTheme();
+function Card({ idParam, name }: typeCard) {
+  console.log(idParam);
+  const theme: any = useTheme();
 
   const { data, error, isLoading } = useGetPokemonByNameQuery(name);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -26,8 +24,7 @@ function Card({ idParam, name, img, types }: typeCard) {
   console.log(data);
 
   // Function to add/remove a Pokémon from favorites
-  const toggleFavorite = (data) => {
-    
+  const toggleFavorite = (data: any) => {
     console.log(data.id);
     const favorites = getFavoritesFromLocalStorage();
     console.log(favorites, "variable favorite di fn toogle favorite");
@@ -37,7 +34,7 @@ function Card({ idParam, name, img, types }: typeCard) {
     if (isFavorite) {
       // Remove from favorites
       const updatedFavorites = favorites.filter(
-        (favoriteId) => favoriteId !== data.id
+        (favoriteId: any) => favoriteId !== data.id
       );
       console.log(updatedFavorites, "update favorite");
       setFavoritesToLocalStorage(updatedFavorites);
@@ -73,58 +70,77 @@ function Card({ idParam, name, img, types }: typeCard) {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
+  const initTipe = data?.types[0].type.name;
 
-  const initTipe = data && data.types[0].type.name
+  const tipe = initTipe;
 
-  const tipe = initTipe
-  
-  console.log(`${theme.color.type[tipe]} hayoo`)
+  console.log(`${theme.color.type[tipe]} hayoo`);
 
-  console.log(tipe)
+  console.log(tipe);
 
-
-  console.log(theme.color.type.normal)
+  console.log(theme.color.type.normal);
 
   const card = css`
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  border-radius: 5px;
-  padding: 0.5em;
-  cursor: pointer;
-  transition: 0.1s all ease;
-  background: ${theme.color.type[tipe]};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    border-radius: 5px;
+    padding: 0.5em;
 
-  &:hover {
-    transform: scale(1.02);
     transition: 0.1s all ease;
-  }
-`;
+    background: ${theme.color.type[tipe]};
+
+    &:hover {
+      transform: scale(1.02);
+      transition: 0.1s all ease;
+      opacity: 0.8;
+    }
+  `;
 
   return (
-  
-    <div css={card}  className="flex flex-col  max-w-screen-lg border border-red-500 w-1/3">
+    <div
+      css={card}
+      className="flex flex-col  max-w-screen-lg border border-red-500 w-1/3"
+    >
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>Error: {error.message}</p>
+        <p>Error...</p>
       ) : (
         data && (
-          <>
-            <p>{data.id}</p>
-            <p>{data.name}</p>
-            <p>{data.types[0].type.name}</p>
-            <img src={data.sprites.front_default} />
-            <button onClick={() => toggleFavorite(data)}>
+          <div className="w-full text-center items-center flex flex-col border border-red-300">
+            <Link to={"/pokemon/" + data.name}>
+              <p className="font-poppins font-reguler text-lg text-zinc-900">
+                {data.id}
+              </p>
+              <p className="font-poppins font-bold text-lg text-zinc-900">
+                {data.name}
+              </p>
+            </Link>
+            <div className="flex flex-row justify-around w-full border border-red-500">
+              <Link>
+                <p className="font-poppins font-semibold hover:opacity-90 text-lg text-orange-900">
+                  {data.types[0].type.name}
+                </p>
+              </Link>
+              <Link>
+                <p className="font-poppins text-purple-900 font-semibold hover:opacity-90 text-lg ">
+                  {data.types[1]?.type?.name}
+                </p>
+              </Link>
+            </div>
+            <img src={data.sprites?.front_default} alt={data.name} />
+            <button
+              className="font-poppins font-reguler text-lg text-zinc-900"
+              onClick={() => toggleFavorite(data)}
+            >
               {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
             </button>
-          </>
+          </div>
         )
-        )}
+      )}
     </div>
-        
   );
 }
 

@@ -20,6 +20,8 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./theme";
+import Favorite from "./pages/Favorite";
+import TypePages from "./pages/TypePages";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/pokemon",
+    element: <Favorite />,
+  },
+  {
+    path: "/pokemon/:name",
     element: <Detail />,
+  },
+  {
+    path: "/:type",
+    element: <TypePages/>,
   },
 ]);
 
