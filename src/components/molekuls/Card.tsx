@@ -9,6 +9,7 @@ type typeCard = {
 };
 
 function Card({ idParam, name, img, types }: typeCard) {
+  console.log(idParam)
   const { data, error, isLoading } = useGetPokemonByNameQuery(name);
   const [isFavorite, setIsFavorite] = useState(false);
 
